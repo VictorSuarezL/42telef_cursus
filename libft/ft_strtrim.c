@@ -1,22 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isalpha.c                                       :+:      :+:    :+:   */
+/*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vsanz-su <vsanz-su@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/21 11:02:22 by vsanz-su          #+#    #+#             */
-/*   Updated: 2023/09/21 11:02:28 by vsanz-su         ###   ########.fr       */
+/*   Created: 2023/09/25 13:38:54 by vsanz-su          #+#    #+#             */
+/*   Updated: 2023/09/25 13:41:00 by vsanz-su         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_isalpha(int i)
+char *ft_strtrim(char const *s1, char const *set)
 {
-	if ((i >= 'a' && i <= 'z') || (i >= 'A' && i <= 'Z'))
+	int i;
+	int size;
+
+	if (s1 == 0 || set == 0)
 	{
-		return (1);
+		return(0);
 	}
-	return (0);
+	i = 0;
+	while (ft_strchr(set, *s1) && *s1 != '\0')
+	{
+		s1++;
+	}
+	size = ft_strlen((char *)s1);
+	while (ft_strchr(set, s1[size]) && size > 0)
+	{
+		size--;
+	}
+	return(ft_substr((char *)s1, 0, size + 1));
 }
+

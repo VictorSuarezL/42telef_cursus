@@ -1,22 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isalpha.c                                       :+:      :+:    :+:   */
+/*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vsanz-su <vsanz-su@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/21 11:02:22 by vsanz-su          #+#    #+#             */
-/*   Updated: 2023/09/21 11:02:28 by vsanz-su         ###   ########.fr       */
+/*   Created: 2023/09/21 11:23:06 by vsanz-su          #+#    #+#             */
+/*   Updated: 2023/09/21 11:23:08 by vsanz-su         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_isalpha(int i)
+char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
 {
-	if ((i >= 'a' && i <= 'z') || (i >= 'A' && i <= 'Z'))
+	size_t	size_to_find;
+	char	*str;
+	char	*to_find;
+
+	str = (char *)haystack;
+	to_find = (char *)needle;
+	size_to_find = ft_strlen(needle);
+	if (size_to_find == 0)
 	{
-		return (1);
+		return (str);
 	}
-	return (0);
+	while (*str && len-- >= size_to_find)
+	{
+		if (*str == *to_find && ft_memcmp(str, to_find, size_to_find) == 0)
+		{
+			return (str);
+		}
+		str++;
+	}
+	return (NULL);
 }
